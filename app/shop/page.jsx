@@ -86,19 +86,31 @@ export default function ShopPage() {
               className="w-full rounded-full border border-[#2e2e24]/25 bg-transparent px-5 py-3 text-sm focus:border-[#2e2e24] focus:outline-none"
             />
           </div>
-          <div>
+          <div className="relative">
             <label htmlFor="shop-step" className="sr-only">Filter by routine step</label>
             <select
               id="shop-step"
               value={step}
               onChange={(e) => setStep(e.target.value)}
-              className="w-full rounded-full border border-[#2e2e24]/25 bg-transparent px-5 py-3 text-sm sm:w-auto"
+              className="h-[46px] w-full appearance-none rounded-full border border-[#2e2e24]/25 bg-transparent pl-5 pr-11 text-sm leading-none focus:border-[#2e2e24] focus:outline-none sm:w-auto"
             >
               <option value="">All steps</option>
               <option value="cleanse">Cleanse</option>
               <option value="treat">Treat</option>
               <option value="seal">Seal</option>
             </select>
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 16 16"
+              className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[#2e2e24]/70"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="m4 6 4 4 4-4" />
+            </svg>
           </div>
         </form>
         {stale && (
