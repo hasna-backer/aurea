@@ -46,6 +46,7 @@ export default function CartPage() {
                     {user ? (
                       <>
                         <input
+                          aria-label={`Quantity for ${i.name || i.slug}`}
                           type="number"
                           min={0}
                           max={99}

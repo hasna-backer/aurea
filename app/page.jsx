@@ -202,7 +202,7 @@ export default function Page() {
               window.location.href = `/quiz${q}`;
             }}
           >
-            <input name="email" type="email" placeholder="you@email.com (optional)" className="flex-1 rounded-full border border-white/20 bg-transparent px-6 py-4 text-sm placeholder:text-white/40 focus:border-white/60 focus:outline-none" />
+            <input name="email" aria-label="Email for quiz results, optional" type="email" placeholder="you@email.com (optional)" className="flex-1 rounded-full border border-white/20 bg-transparent px-6 py-4 text-sm placeholder:text-white/40 focus:border-white/60 focus:outline-none" />
             <button className="rounded-full bg-[#f5f0e8] px-8 py-4 text-sm font-semibold text-[#2e2e24]">Start quiz</button>
           </form>
         </div>

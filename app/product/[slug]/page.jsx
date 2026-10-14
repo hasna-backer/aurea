@@ -81,6 +81,7 @@ export default function ProductPage({ params }) {
             <p className="mt-1 text-sm opacity-60">{product.stock > 0 ? `${product.stock} in stock` : 'Out of stock'}</p>
             <div className="mt-5 flex items-center gap-3">
               <input
+                aria-label="Quantity"
                 type="number"
                 min={1}
                 max={9}
