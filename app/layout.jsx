@@ -1,4 +1,5 @@
 import './globals.css';
+import { ShopProvider } from '../lib/store';
 
 export const metadata = {
   title: 'Aurea — Minimal Clinical Skincare',
@@ -9,7 +10,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <ShopProvider>{children}</ShopProvider>
+      </body>
     </html>
   );
 }
