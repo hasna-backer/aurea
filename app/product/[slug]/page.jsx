@@ -1,12 +1,12 @@
 'use client';
 
-import { use, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import SiteNav from '../../../components/SiteNav';
 import { api } from '../../../lib/api';
 import { useShop } from '../../../lib/store';
 
 export default function ProductPage({ params }) {
-  const { slug } = use(params);
+  const { slug } = params;
   const { user, addToCart } = useShop();
   const [product, setProduct] = useState(null);
   const [reviews, setReviews] = useState([]);
