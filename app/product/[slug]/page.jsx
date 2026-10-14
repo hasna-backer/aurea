@@ -14,6 +14,7 @@ export default function ProductPage({ params }) {
   const [msg, setMsg] = useState('');
   const [rating, setRating] = useState(5);
   const [text, setText] = useState('');
+  const [reviewMsg, setReviewMsg] = useState('');
   const [error, setError] = useState('');
 
   useEffect(() => {
@@ -42,12 +43,12 @@ export default function ProductPage({ params }) {
     e.preventDefault();
     setError('');
     try {
-      const { review } = await api(`/api/reviews/product/${product._id}`, {
+      await api(`/api/reviews/product/${product._id}`, {
         method: 'POST',
         body: { rating, text },
       });
-      setReviews([review, ...reviews]);
       setText('');
+      setReviewMsg('Thanks ✓ — your review was submitted and will appear after moderation.');
     } catch (e) {
       setError(e.message);
     }
@@ -112,11 +113,18 @@ export default function ProductPage({ params }) {
           </div>
           <form onSubmit={submitReview} className="mt-8 max-w-xl space-y-3">
             <h3 className="font-serif-d text-2xl">Write a review {user ? '' : '(login required)'}</h3>
-            <select value={rating} onChange={(e) => setRating(Number(e.target.value))} className="border border-[#2e2e24]/25 bg-transparent px-3 py-2">
-              {[5, 4, 3, 2, 1].map((n) => <option key={n} value={n}>{n} stars</option>)}
-            </select>
-            <textarea required value={text} onChange={(e) => setText(e.target.value)} rows={3} placeholder="How did it work for you?" className="w-full border border-[#2e2e24]/25 bg-transparent px-4 py-3 text-sm" />
+            <div>
+              <label htmlFor="rv-rating" className="sr-only">Star rating</label>
+              <select id="rv-rating" value={rating} onChange={(e) => setRating(Number(e.target.value))} className="border border-[#2e2e24]/25 bg-transparent px-3 py-2">
+                {[5, 4, 3, 2, 1].map((n) => <option key={n} value={n}>{n} stars</option>)}
+              </select>
+            </div>
+            <div>
+              <label htmlFor="rv-text" className="sr-only">Your review</label>
+              <textarea id="rv-text" required value={text} onChange={(e) => setText(e.target.value)} rows={3} placeholder="How did it work for you?" className="w-full border border-[#2e2e24]/25 bg-transparent px-4 py-3 text-sm" />
+            </div>
             {error && <p className="text-sm text-red-700">{error}</p>}
+            {reviewMsg && <p className="text-sm">{reviewMsg}</p>}
             <button className="bg-[#2e2e24] px-6 py-3 text-sm text-[#f5f0e8]">Submit review</button>
           </form>
         </section>

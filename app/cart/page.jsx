@@ -64,7 +64,10 @@ export default function CartPage() {
             </ul>
             {user && (
               <form onSubmit={apply} className="mt-6 flex gap-3">
-                <input value={code} onChange={(e) => setCode(e.target.value)} placeholder="Coupon (try WELCOME10)" className="flex-1 border border-[#2e2e24]/25 bg-transparent px-4 py-3 text-sm" />
+                <div className="flex-1">
+                  <label htmlFor="cart-coupon" className="sr-only">Coupon code</label>
+                  <input id="cart-coupon" value={code} onChange={(e) => setCode(e.target.value)} placeholder="Coupon (try WELCOME10)" className="w-full border border-[#2e2e24]/25 bg-transparent px-4 py-3 text-sm" />
+                </div>
                 <button className="border border-[#2e2e24] px-6 py-3 text-sm">Apply</button>
               </form>
             )}

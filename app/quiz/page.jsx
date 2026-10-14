@@ -110,7 +110,8 @@ export default function QuizPage() {
         </div>
         {step === 3 && answers.routine && (
           <div className="mt-6 space-y-3">
-            <input type="email" placeholder="Email for results (optional)" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full border border-[#2e2e24]/25 bg-transparent px-4 py-3 text-sm" />
+            <label htmlFor="quiz-email" className="sr-only">Email for results, optional</label>
+            <input id="quiz-email" type="email" placeholder="Email for results (optional)" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full border border-[#2e2e24]/25 bg-transparent px-4 py-3 text-sm" />
             {error && <p className="text-sm text-red-700">{error}</p>}
             <button onClick={submit} disabled={busy} className="w-full bg-[#2e2e24] py-4 text-sm font-semibold uppercase tracking-[0.18em] text-[#f5f0e8] disabled:opacity-50">
               {busy ? 'Matching…' : 'See my routine'}

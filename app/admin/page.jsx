@@ -157,7 +157,8 @@ export default function AdminPage() {
               <li key={o._id} className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-[#e3d9c4] bg-white/60 p-4">
                 <span><span className="font-mono text-xs">{o._id.slice(-8)}</span> · {o.email} · ${o.total}</span>
                 <span className="flex gap-2">
-                  <select value={o.status} onChange={(e) => setOrder(o._id, { status: e.target.value })} className="border border-[#2e2e24]/25 bg-transparent px-2 py-1">
+                  <label htmlFor={`ord-${o._id}`} className="sr-only">Order status</label>
+                  <select id={`ord-${o._id}`} value={o.status} onChange={(e) => setOrder(o._id, { status: e.target.value })} className="border border-[#2e2e24]/25 bg-transparent px-2 py-1">
                     {['pending', 'paid', 'fulfilled', 'shipped', 'delivered', 'cancelled', 'refunded'].map((s) => <option key={s}>{s}</option>)}
                   </select>
                 </span>
@@ -169,10 +170,14 @@ export default function AdminPage() {
         {tab === 'Products' && data?.products && (
           <div className="mt-8">
             <form onSubmit={saveProduct} className="flex flex-wrap gap-2">
-              <input required placeholder="slug" value={form.slug} onChange={(e) => setForm({ ...form, slug: e.target.value })} className="border border-[#2e2e24]/25 bg-transparent px-3 py-2 text-sm" />
-              <input required placeholder="Name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="border border-[#2e2e24]/25 bg-transparent px-3 py-2 text-sm" />
-              <input required type="number" placeholder="Price" value={form.price} onChange={(e) => setForm({ ...form, price: e.target.value })} className="w-24 border border-[#2e2e24]/25 bg-transparent px-3 py-2 text-sm" />
-              <input required type="number" placeholder="Stock" value={form.stock} onChange={(e) => setForm({ ...form, stock: e.target.value })} className="w-24 border border-[#2e2e24]/25 bg-transparent px-3 py-2 text-sm" />
+              <label htmlFor="ap-slug" className="sr-only">Product slug</label>
+              <input id="ap-slug" required placeholder="slug" value={form.slug} onChange={(e) => setForm({ ...form, slug: e.target.value })} className="border border-[#2e2e24]/25 bg-transparent px-3 py-2 text-sm" />
+              <label htmlFor="ap-name" className="sr-only">Product name</label>
+              <input id="ap-name" required placeholder="Name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="border border-[#2e2e24]/25 bg-transparent px-3 py-2 text-sm" />
+              <label htmlFor="ap-price" className="sr-only">Price in dollars</label>
+              <input id="ap-price" required type="number" placeholder="Price" value={form.price} onChange={(e) => setForm({ ...form, price: e.target.value })} className="w-24 border border-[#2e2e24]/25 bg-transparent px-3 py-2 text-sm" />
+              <label htmlFor="ap-stock" className="sr-only">Stock count</label>
+              <input id="ap-stock" required type="number" placeholder="Stock" value={form.stock} onChange={(e) => setForm({ ...form, stock: e.target.value })} className="w-24 border border-[#2e2e24]/25 bg-transparent px-3 py-2 text-sm" />
               <button className="bg-[#2e2e24] px-5 py-2 text-sm text-[#f5f0e8]">Add</button>
             </form>
             <ul className="mt-4 space-y-2 text-sm">
@@ -215,12 +220,15 @@ export default function AdminPage() {
         {tab === 'Coupons' && data?.coupons && (
           <div className="mt-8">
             <form onSubmit={createCoupon} className="flex flex-wrap gap-2">
-              <input name="code" required placeholder="CODE" className="border border-[#2e2e24]/25 bg-transparent px-3 py-2 text-sm" />
-              <select name="type" className="border border-[#2e2e24]/25 bg-transparent px-3 py-2 text-sm">
+              <label htmlFor="ac-code" className="sr-only">Coupon code</label>
+              <input id="ac-code" name="code" required placeholder="CODE" className="border border-[#2e2e24]/25 bg-transparent px-3 py-2 text-sm" />
+              <label htmlFor="ac-type" className="sr-only">Discount type</label>
+              <select id="ac-type" name="type" className="border border-[#2e2e24]/25 bg-transparent px-3 py-2 text-sm">
                 <option value="percent">percent</option>
                 <option value="fixed">fixed $</option>
               </select>
-              <input name="value" required type="number" placeholder="10" className="w-24 border border-[#2e2e24]/25 bg-transparent px-3 py-2 text-sm" />
+              <label htmlFor="ac-value" className="sr-only">Discount value</label>
+              <input id="ac-value" name="value" required type="number" placeholder="10" className="w-24 border border-[#2e2e24]/25 bg-transparent px-3 py-2 text-sm" />
               <button className="bg-[#2e2e24] px-5 py-2 text-sm text-[#f5f0e8]">Create</button>
             </form>
             <ul className="mt-4 space-y-2 text-sm">

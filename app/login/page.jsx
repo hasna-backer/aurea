@@ -35,22 +35,30 @@ export default function LoginPage() {
         <p className="eyebrow text-[#b89b5e]">Welcome back</p>
         <h1 className="font-serif-d mt-3 text-5xl">Login</h1>
         <form onSubmit={submit} className="mt-8 space-y-4">
-          <input
-            type="email"
-            required
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-full border border-[#2e2e24]/25 bg-transparent px-4 py-3 text-sm focus:border-[#2e2e24] focus:outline-none"
-          />
-          <input
-            type="password"
-            required
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full border border-[#2e2e24]/25 bg-transparent px-4 py-3 text-sm focus:border-[#2e2e24] focus:outline-none"
-          />
+          <div>
+            <label htmlFor="li-email" className="sr-only">Email</label>
+            <input
+              id="li-email"
+              type="email"
+              required
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full border border-[#2e2e24]/25 bg-transparent px-4 py-3 text-sm focus:border-[#2e2e24] focus:outline-none"
+            />
+          </div>
+          <div>
+            <label htmlFor="li-pass" className="sr-only">Password</label>
+            <input
+              id="li-pass"
+              type="password"
+              required
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full border border-[#2e2e24]/25 bg-transparent px-4 py-3 text-sm focus:border-[#2e2e24] focus:outline-none"
+            />
+          </div>
           {error && <p className="text-sm text-red-700">{error}</p>}
           <button
             disabled={busy}

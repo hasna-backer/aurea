@@ -36,30 +36,42 @@ export default function SignupPage() {
         <p className="eyebrow text-[#b89b5e]">Three steps, four minutes</p>
         <h1 className="font-serif-d mt-3 text-5xl">Create account</h1>
         <form onSubmit={submit} className="mt-8 space-y-4">
-          <input
-            required
-            placeholder="Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="w-full border border-[#2e2e24]/25 bg-transparent px-4 py-3 text-sm focus:border-[#2e2e24] focus:outline-none"
-          />
-          <input
-            type="email"
-            required
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-full border border-[#2e2e24]/25 bg-transparent px-4 py-3 text-sm focus:border-[#2e2e24] focus:outline-none"
-          />
-          <input
-            type="password"
-            required
-            minLength={8}
-            placeholder="Password (8+ chars)"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full border border-[#2e2e24]/25 bg-transparent px-4 py-3 text-sm focus:border-[#2e2e24] focus:outline-none"
-          />
+          <div>
+            <label htmlFor="su-name" className="sr-only">Name</label>
+            <input
+              id="su-name"
+              required
+              placeholder="Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="w-full border border-[#2e2e24]/25 bg-transparent px-4 py-3 text-sm focus:border-[#2e2e24] focus:outline-none"
+            />
+          </div>
+          <div>
+            <label htmlFor="su-email" className="sr-only">Email</label>
+            <input
+              id="su-email"
+              type="email"
+              required
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full border border-[#2e2e24]/25 bg-transparent px-4 py-3 text-sm focus:border-[#2e2e24] focus:outline-none"
+            />
+          </div>
+          <div>
+            <label htmlFor="su-pass" className="sr-only">Password, 8 or more characters</label>
+            <input
+              id="su-pass"
+              type="password"
+              required
+              minLength={8}
+              placeholder="Password (8+ chars)"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full border border-[#2e2e24]/25 bg-transparent px-4 py-3 text-sm focus:border-[#2e2e24] focus:outline-none"
+            />
+          </div>
           {error && <p className="text-sm text-red-700">{error}</p>}
           <button
             disabled={busy}

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -15,8 +15,11 @@ const PRODUCTS = [
 
 export default function Page() {
   const root = useRef(null);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
+    // Respect reduced-motion: leave content visible, skip all animation.
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const ctx = gsap.context(() => {
       gsap.fromTo('.hero-line', { yPercent: 110 }, { yPercent: 0, duration: 1.15, stagger: 0.1, ease: 'power4.out', delay: 0.15 });
       gsap.fromTo('.hero-fade', { y: 22, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, stagger: 0.1, delay: 0.6, ease: 'power3.out' });
@@ -37,13 +40,40 @@ export default function Page() {
       <header className="fixed inset-x-0 top-0 z-50 border-b border-[#e3d9c4] bg-[#f5f0e8]/90 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
           <a href="#top" className="font-serif-d text-3xl tracking-tight">Aurea</a>
-          <nav className="hidden items-center gap-8 text-[13px] font-medium uppercase tracking-[0.18em] md:flex">
+          <nav aria-label="Primary" className="hidden items-center gap-8 text-[13px] font-medium uppercase tracking-[0.18em] md:flex">
             <a href="#ritual" className="opacity-70 hover:opacity-100">Ritual</a>
             <a href="#shop" className="opacity-70 hover:opacity-100">Shop</a>
             <a href="#reviews" className="opacity-70 hover:opacity-100">Reviews</a>
             <a href="/quiz" className="bg-[#2e2e24] px-5 py-2.5 text-[#f5f0e8] hover:opacity-85 transition">Take the quiz</a>
           </nav>
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-expanded={menuOpen}
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            className="flex h-11 w-11 items-center justify-center border border-[#2e2e24]/25 text-xl md:hidden"
+          >
+            {menuOpen ? '✕' : '☰'}
+          </button>
         </div>
+        {menuOpen && (
+          <nav aria-label="Mobile" className="border-t border-[#e3d9c4] bg-[#f5f0e8] px-6 py-4 md:hidden">
+            <ul className="space-y-1 text-sm font-medium uppercase tracking-[0.18em]">
+              {[
+                { href: '#ritual', label: 'Ritual' },
+                { href: '#shop', label: 'Shop' },
+                { href: '#reviews', label: 'Reviews' },
+                { href: '/quiz', label: 'Take the quiz' },
+                { href: '/contact', label: 'Contact' },
+              ].map((l) => (
+                <li key={l.label}>
+                  <a href={l.href} onClick={() => setMenuOpen(false)} className="block py-3">
+                    {l.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        )}
       </header>
 
       <section id="top" className="mx-auto grid max-w-6xl gap-12 px-6 pt-32 md:grid-cols-2 md:items-center md:pt-40">
