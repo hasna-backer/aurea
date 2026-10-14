@@ -41,7 +41,7 @@ export default function Page() {
             <a href="#ritual" className="opacity-70 hover:opacity-100">Ritual</a>
             <a href="#shop" className="opacity-70 hover:opacity-100">Shop</a>
             <a href="#reviews" className="opacity-70 hover:opacity-100">Reviews</a>
-            <a href="#contact" className="bg-[#2e2e24] px-5 py-2.5 text-[#f5f0e8] hover:opacity-85 transition">Take the quiz</a>
+            <a href="/quiz" className="bg-[#2e2e24] px-5 py-2.5 text-[#f5f0e8] hover:opacity-85 transition">Take the quiz</a>
           </nav>
         </div>
       </header>
@@ -161,10 +161,18 @@ export default function Page() {
           <div className="reveal">
             <p className="eyebrow text-[#d8bd84]">Find your routine</p>
             <h2 className="font-serif-d mt-4 text-5xl tracking-tight">Take the 60-second quiz.</h2>
-            <p className="mt-4 opacity-70">Fictional demo — this form does nothing.</p>
+            <p className="mt-4 opacity-70">Answer 4 questions, get your 3-step routine. Prefer email? <a href="/contact" className="underline">Contact us</a>.</p>
           </div>
-          <form className="reveal flex flex-col gap-3 md:flex-row" onSubmit={(e) => e.preventDefault()}>
-            <input required type="email" placeholder="you@email.com" className="flex-1 rounded-full border border-white/20 bg-transparent px-6 py-4 text-sm placeholder:text-white/40 focus:border-white/60 focus:outline-none" />
+          <form
+            className="reveal flex flex-col gap-3 md:flex-row"
+            onSubmit={(e) => {
+              e.preventDefault();
+              const value = new FormData(e.currentTarget).get('email');
+              const q = value ? `?email=${encodeURIComponent(value)}` : '';
+              window.location.href = `/quiz${q}`;
+            }}
+          >
+            <input name="email" type="email" placeholder="you@email.com (optional)" className="flex-1 rounded-full border border-white/20 bg-transparent px-6 py-4 text-sm placeholder:text-white/40 focus:border-white/60 focus:outline-none" />
             <button className="rounded-full bg-[#f5f0e8] px-8 py-4 text-sm font-semibold text-[#2e2e24]">Start quiz</button>
           </form>
         </div>

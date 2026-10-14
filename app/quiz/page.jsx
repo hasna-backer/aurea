@@ -24,6 +24,8 @@ export default function QuizPage() {
 
   useEffect(() => {
     api('/api/quiz/meta').catch(() => {});
+    const q = new URLSearchParams(window.location.search).get('email');
+    if (q) setEmail(q);
   }, []);
 
   async function submit() {
